@@ -1,0 +1,6 @@
+"NRF24L01.obj",
+"SPI.obj",
+".\sameShit.obj",
+"main.obj" 
+TO "NRF" 
+RAMSIZE(256) 

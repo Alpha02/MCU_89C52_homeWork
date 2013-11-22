@@ -1,0 +1,6 @@
+"ADXL345.obj",
+"IIC.obj",
+".\sameShit.obj",
+"main.obj" 
+TO "ADXL" 
+RAMSIZE(256) 

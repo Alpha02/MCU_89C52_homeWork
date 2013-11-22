@@ -1,0 +1,87 @@
+C51 COMPILER V9.00   NRF24L01                                                              06/30/2013 13:33:27 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE NRF24L01
+OBJECT MODULE PLACED IN NRF24L01.OBJ
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil\C51\BIN\C51.EXE NRF24L01.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          #include "NRF24L01.h" 
+   3          
+   4          sbit    MISO    =P1^5;
+   5          sbit    MOSI    =P1^1;
+   6          sbit    SCK         =P1^6;
+   7          sbit    CE          =P1^7;
+   8          sbit    CSN             =P1^2;
+   9          sbit    IRQ             =P1^0;
+  10          
+  11          uint    bdata sta;   //状态标志
+  12          sbit    Flag_Receive    =sta^6;
+  13          sbit    Flag_Send               =sta^5;
+  14          sbit    MAX_ReSend              =sta^4;
+  15          uint const TX_ADDRESS[TX_ADR_WIDTH]= {0x34,0x43,0x10,0x10,0x01};        //本地地址
+  16          uint const RX_ADDRESS[RX_ADR_WIDTH]= {0x34,0x43,0x10,0x10,0x01};        //发送数据给该地址
+  17          
+  18          
+  19          void NRF_Init(void){
+  20   1              Delay_us(100);
+  21   1              CE=0;    // chip enable
+  22   1              CSN=1;   // Spi disable 
+  23   1              SCK=0;   // Spi clock line init high
+  24   1              SPI_Write_Buf(WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH);    // 写本地地址  
+  25   1              SPI_Write_Buf(WRITE_REG + RX_ADDR_P0, RX_ADDRESS, RX_ADR_WIDTH); // 写接收端地址
+  26   1              SPI_WriteReg(WRITE_REG + EN_AA, 0x01);      //  频道0自动       ACK应答允许     
+  27   1              SPI_WriteReg(WRITE_REG + EN_RXADDR, 0x01);  //  允许接收地址只有频道0，如果需要多频道可以参考Page21  
+  28   1              SPI_WriteReg(WRITE_REG + RF_CH, 40);        //   设置信道工作为2.4GHZ，收发必须一致
+  29   1              SPI_WriteReg(WRITE_REG + RX_PW_P0, RX_PLOAD_WIDTH); //设置接收数据长度，本次设置为20字节
+  30   1              SPI_WriteReg(WRITE_REG + RF_SETUP, 0x07);               //设置发射速率为1MHZ，发射功率为最大值0dB
+  31   1      }
+  32          void NRF_setMode_Receive(){
+  33   1              CE=0;
+  34   1              SPI_WriteReg(WRITE_REG + CONFIG, 0x0f);                 // IRQ收发完成中断响应，16位CRC ，主接收
+  35   1              CE = 1; 
+  36   1              Delay_us(130);
+  37   1      }
+  38          void NRF_setMode_Send(){
+  39   1              CE=0;
+  40   1              SPI_WriteReg(WRITE_REG + CONFIG, 0x0e);                         // IRQ收发完成中断响应，16位CRC，主发送
+  41   1              CE = 1; 
+  42   1              Delay_us(130);
+  43   1      }
+  44          void NRF_Send(uchar * buf_send){
+  45   1              CE=0;                   //StandBy I模式 
+  46   1              SPI_Write_Buf(WRITE_REG + RX_ADDR_P0, TX_ADDRESS, TX_ADR_WIDTH); // 装载接收端地址
+  47   1              SPI_Write_Buf(WR_TX_PLOAD, buf_send, TX_PLOAD_WIDTH);                    // 装载数据    
+  48   1              SPI_WriteReg(WRITE_REG + CONFIG, 0x0e);                  // IRQ收发完成中断响应，16位CRC，主发送
+  49   1              CE=1;            //置高CE，激发数据发送
+  50   1              Delay_us(10);
+  51   1      }
+  52          void NRF_Receive(uchar * buf_recv){
+  53   1              //uchar revale=0;
+  54   1              sta=SPI_ReadReg(STATUS);        // 读取状态寄存其来判断数据接收状况
+  55   1              if(Flag_Receive)                                // 判断是否接收到数据
+C51 COMPILER V9.00   NRF24L01                                                              06/30/2013 13:33:27 PAGE 2   
+
+  56   1              {
+  57   2                  CE = 0;                     //SPI使能
+  58   2                      SPI_Read_Buf(RD_RX_PLOAD,buf_recv,TX_PLOAD_WIDTH);// read receive payload from RX_FIFO buffer
+  59   2                      //revale =1;                    //读取数据完成标志
+  60   2              }
+  61   1              SPI_WriteReg(WRITE_REG+STATUS,sta);   //接收到数据后RX_DR,TX_DS,MAX_PT都置高为1，通过写1来清楚中断标志
+  62   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    195    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

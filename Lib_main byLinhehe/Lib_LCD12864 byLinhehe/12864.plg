@@ -1,0 +1,127 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\Linhehe\电赛\Lib_main byLinhehe\Lib_LCD12864 byLinhehe\12864.uvproj
+Project File Date:  06/30/2013
+
+<h2>Output:</h2>
+compiling 12864.c...
+12864.C(4): error C100: unprintable character 0xD3 skipped
+12864.C(4): error C100: unprintable character 0xC3 skipped
+12864.C(4): error C100: unprintable character 0xC8 skipped
+12864.C(4): error C100: unprintable character 0xA1 skipped
+12864.C(4): error C100: unprintable character 0xC4 skipped
+12864.C(4): error C100: unprintable character 0xA3 skipped
+12864.C(4): error C100: unprintable character 0xC8 skipped
+12864.C(4): error C100: unprintable character 0xED skipped
+12864.C(4): error C100: unprintable character 0xBC skipped
+12864.C(4): error C100: unprintable character 0xFE skipped
+12864.C(4): error C100: unprintable character 0xC8 skipped
+12864.C(4): error C100: unprintable character 0xA1 skipped
+12864.C(4): error C100: unprintable character 0xB5 skipped
+12864.C(4): error C100: unprintable character 0xC4 skipped
+12864.C(4): error C100: unprintable character 0xCD skipped
+12864.C(4): error C100: unprintable character 0xBC skipped
+12864.C(4): error C100: unprintable character 0xD0 skipped
+12864.C(4): error C100: unprintable character 0xCE skipped
+12864.C(4): error C100: unprintable character 0xBB skipped
+12864.C(4): error C100: unprintable character 0xF2 skipped
+12864.C(4): error C100: unprintable character 0xBA skipped
+12864.C(4): error C100: unprintable character 0xBA skipped
+12864.C(4): error C100: unprintable character 0xD7 skipped
+12864.C(4): error C100: unprintable character 0xD6 skipped
+12864.C(4): error C100: unprintable character 0xB1 skipped
+12864.C(4): error C100: unprintable character 0xD8 skipped
+12864.C(4): error C100: unprintable character 0xD0 skipped
+12864.C(4): error C100: unprintable character 0xEB skipped
+12864.C(4): error C100: unprintable character 0xCA skipped
+12864.C(4): error C100: unprintable character 0xC7 skipped
+12864.C(4): error C100: unprintable character 0xD6 skipped
+12864.C(4): error C100: unprintable character 0xF0 skipped
+12864.C(4): error C100: unprintable character 0xD0 skipped
+12864.C(4): error C100: unprintable character 0xD0 skipped
+12864.C(4): error C100: unprintable character 0xC8 skipped
+12864.C(4): error C100: unprintable character 0xA1 skipped
+12864.C(4): error C100: unprintable character 0xB5 skipped
+12864.C(4): error C100: unprintable character 0xC4 skipped
+12864.C(4): error C100: unprintable character 0xA3 skipped
+12864.C(4): error C100: unprintable character 0xAC skipped
+12864.C(4): error C100: unprintable character 0xD2 skipped
+12864.C(4): error C100: unprintable character 0xF2 skipped
+12864.C(4): error C100: unprintable character 0xCE skipped
+12864.C(4): error C100: unprintable character 0xAA skipped
+12864.C(4): error C100: unprintable character 0xB1 skipped
+12864.C(4): error C100: unprintable character 0xBE skipped
+12864.C(4): error C100: unprintable character 0xBA skipped
+12864.C(4): error C100: unprintable character 0xAF skipped
+12864.C(4): error C100: unprintable character 0xCA skipped
+12864.C(4): error C100: unprintable character 0xCA skipped
+12864.C(4): error C100: unprintable character 0xC7 skipped
+12864.C(4): error C100: unprintable character 0xD4 skipped
+12864.C(4): error C100: unprintable character 0xDA skipped
+12864.C(4): error C100: unprintable character 0xD2 skipped
+12864.C(4): error C100: unprintable character 0xBA skipped
+12864.C(4): error C100: unprintable character 0xBE skipped
+12864.C(4): error C100: unprintable character 0xA7 skipped
+12864.C(4): error C100: unprintable character 0xC9 skipped
+12864.C(4): error C100: unprintable character 0xCF skipped
+12864.C(4): error C100: unprintable character 0xD6 skipped
+12864.C(4): error C100: unprintable character 0xF0 skipped
+12864.C(4): error C100: unprintable character 0xD0 skipped
+12864.C(4): error C100: unprintable character 0xD0 skipped
+12864.C(4): error C100: unprintable character 0xB4 skipped
+12864.C(4): error C100: unprintable character 0xF2 skipped
+12864.C(4): error C100: unprintable character 0xB5 skipped
+12864.C(4): error C100: unprintable character 0xE3 skipped
+12864.C(4): error C100: unprintable character 0xB5 skipped
+12864.C(4): error C100: unprintable character 0xC4 skipped
+12864.c - 69 Error(s), 0 Warning(s).
+compiling 12864.c...
+12864.c - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISPLAY_CHAR?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISPLAY_STRING?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GUI_LINE?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GUI_RECTANGLE?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GUI_PUT_AREA?12864
+Program Size: data=74.0 xdata=0 code=1787
+"12864" - 0 Error(s), 5 Warning(s).
+compiling 12864.c...
+../sameShit.h(5): warning C318: can't open file 'PINS.h'
+12864.c - 0 Error(s), 1 Warning(s).
+compiling 12864.c...
+12864.c - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+compiling sameShit.c...
+linking...
+*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
+    SYMBOL:  _DELAY
+    MODULE:  12864.obj (12864)
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_US?SAMESHIT
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY5US?SAMESHIT
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY5MS?SAMESHIT
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?SAMESHIT
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISPLAY_CHAR?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISPLAY_STRING?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GUI_LINE?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GUI_RECTANGLE?12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GUI_PUT_AREA?12864
+Program Size: data=70.0 xdata=0 code=1824
+目标未创建

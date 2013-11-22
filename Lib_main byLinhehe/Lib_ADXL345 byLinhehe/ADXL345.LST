@@ -1,0 +1,98 @@
+C51 COMPILER V9.00   ADXL345                                                               06/30/2013 13:28:02 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE ADXL345
+OBJECT MODULE PLACED IN ADXL345.OBJ
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil\C51\BIN\C51.EXE ADXL345.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "..\sameShit.h"
+   2          #include "ADXL345.h"
+   3          #ifndef _IIC_PINS
+   4          #define _IIC_PINS
+   5                  sbit      SCL=P1^0;      //IIC时钟引脚定义
+   6                  sbit      SDA=P1^1;      //IIC数据引脚定义
+   7          #endif
+   8          uchar BUF[8];                         //接收数据缓存区          
+   9          int  data_xyz[3];                                        //读取数值保存于该变量
+  10          //******单字节写入*******************************************
+  11          void Single_Write_ADXL345(uchar REG_Address,uchar REG_data)
+  12          {
+  13   1          IIC_Start();                  //起始信号
+  14   1          IIC_SendByte(SlaveAddress);   //发送设备地址+写信号
+  15   1          IIC_SendByte(REG_Address);    //内部寄存器地址，请参考中文pdf22页 
+  16   1          IIC_SendByte(REG_data);       //内部寄存器数据，请参考中文pdf22页 
+  17   1          IIC_Stop();                   //发送停止信号
+  18   1      }
+  19          
+  20          //********单字节读取*****************************************
+  21          uchar Single_Read_ADXL345(uchar REG_Address)
+  22          {  uchar REG_data;
+  23   1          IIC_Start();                          //起始信号
+  24   1          IIC_SendByte(SlaveAddress);           //发送设备地址+写信号
+  25   1          IIC_SendByte(REG_Address);                   //发送存储单元地址，从0开始    
+  26   1          IIC_Start();                          //起始信号
+  27   1          IIC_SendByte(SlaveAddress+1);         //发送设备地址+读信号
+  28   1          REG_data=IIC_RecvByte();              //读出寄存器数据
+  29   1              IIC_SendACK(1);   
+  30   1              IIC_Stop();                           //停止信号
+  31   1          return REG_data; 
+  32   1      }
+  33          //*********************************************************
+  34          //连续读出ADXL345内部加速度数据，地址范围0x32~0x37
+  35          //*********************************************************
+  36          void Multiple_read_ADXL345(void)
+  37          {   uchar i;
+  38   1          IIC_Start();                          //起始信号
+  39   1          IIC_SendByte(SlaveAddress);           //发送设备地址+写信号
+  40   1          IIC_SendByte(0x32);                   //发送存储单元地址，从0x32开始        
+  41   1          IIC_Start();                          //起始信号
+  42   1          IIC_SendByte(SlaveAddress+1);         //发送设备地址+读信号
+  43   1               for (i=0; i<6; i++)                      //连续读取6个地址数据，存储中BUF
+  44   1          {
+  45   2              BUF[i] = IIC_RecvByte();          //BUF[0]存储0x32地址中的数据
+  46   2              if (i == 5)                                               //1-0 x 3-2 y 5-4 z
+  47   2              {
+  48   3                 IIC_SendACK(1);                //最后一个数据需要回NOACK
+  49   3              }
+  50   2              else
+  51   2              {
+  52   3                IIC_SendACK(0);                //回应ACK
+  53   3             }
+  54   2         }
+  55   1          IIC_Stop();                          //停止信号
+C51 COMPILER V9.00   ADXL345                                                               06/30/2013 13:28:02 PAGE 2   
+
+  56   1          Delay5ms();
+  57   1              data_xyz[0]=(BUF[1]<<8)+BUF[0];  //合成数据   
+  58   1              data_xyz[1]=(BUF[3]<<8)+BUF[2];  //合成数据   
+  59   1              data_xyz[2]=(BUF[5]<<8)+BUF[4];  //合成数据   
+  60   1      }
+  61          
+  62          
+  63          //初始化ADXL345，根据需要请参考pdf进行修改************************
+  64          void Init_ADXL345()
+  65          {
+  66   1         Single_Write_ADXL345(0x31,0x0B);   //测量范围,正负16g，13位模式
+  67   1         Single_Write_ADXL345(0x2C,0x08);   //速率设定为12.5 参考pdf13页
+  68   1         Single_Write_ADXL345(0x2D,0x08);   //选择电源模式   参考pdf24页
+  69   1         Single_Write_ADXL345(0x2E,0x80);   //使能 DATA_READY 中断
+  70   1         Single_Write_ADXL345(0x1E,0x00);   //X 偏移量 根据测试传感器的状态写入pdf29页
+  71   1         Single_Write_ADXL345(0x1F,0x00);   //Y 偏移量 根据测试传感器的状态写入pdf29页
+  72   1         Single_Write_ADXL345(0x20,0x05);   //Z 偏移量 根据测试传感器的状态写入pdf29页
+  73   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    215    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,403 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/30/2013  13:39:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\PROGRAM FILES (X86)\KEIL\C51\BIN\BL51.EXE ADXL345.obj, IIC.obj, .\sameShit.obj, main.obj TO ADXL RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  ADXL345.obj (ADXL345)
+  IIC.obj (IIC)
+  .\sameShit.obj (SAMESHIT)
+  main.obj (MAIN)
+  D:\PROGRAM FILES (X86)\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  ADXL (ADXL345)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000EH     UNIT         ?DT?ADXL345
+            DATA    0016H     0004H     UNIT         _DATA_GROUP_
+            DATA    001AH     0002H     UNIT         ?DT?_SINGLE_READ_ADXL345?ADXL345
+                    001CH     0004H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0066H     UNIT         ?PR?MULTIPLE_READ_ADXL345?ADXL345
+            CODE    0069H     0031H     UNIT         ?PR?INIT_ADXL345?ADXL345
+            CODE    009AH     0029H     UNIT         ?PR?IIC_RECVBYTE?IIC
+            CODE    00C3H     0027H     UNIT         ?PR?_SINGLE_READ_ADXL345?ADXL345
+            CODE    00EAH     0023H     UNIT         ?PR?_IIC_SENDBYTE?IIC
+            CODE    010DH     001BH     UNIT         ?PR?_DELAY?SAMESHIT
+            CODE    0128H     0019H     UNIT         ?PR?_SINGLE_WRITE_ADXL345?ADXL345
+            CODE    0141H     000FH     UNIT         ?PR?IIC_START?IIC
+            CODE    0150H     000EH     UNIT         ?PR?IIC_SENDACK?IIC
+            CODE    015EH     000DH     UNIT         ?PR?IIC_RECVACK?IIC
+            CODE    016BH     000DH     UNIT         ?PR?DELAY5US?SAMESHIT
+            CODE    0178H     000CH     UNIT         ?PR?IIC_STOP?IIC
+            CODE    0184H     000CH     UNIT         ?PR?_DELAY_US?SAMESHIT
+            CODE    0190H     000CH     UNIT         ?C_C51STARTUP
+            CODE    019CH     0009H     UNIT         ?PR?DELAY5MS?SAMESHIT
+            CODE    01A5H     0006H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   ADXL (ADXL345)
+
+
+SEGMENT                                      BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT                     START    LENGTH     START    LENGTH
+-----------------------------------------------------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/30/2013  13:39:15  PAGE 2
+
+
+?C_C51STARTUP                             -----    -----      -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                             -----    -----      -----    -----
+  +--> ?PR?INIT_ADXL345?ADXL345
+  +--> ?PR?MULTIPLE_READ_ADXL345?ADXL345
+
+?PR?INIT_ADXL345?ADXL345                  -----    -----      -----    -----
+  +--> ?PR?_SINGLE_WRITE_ADXL345?ADXL345
+
+?PR?_SINGLE_WRITE_ADXL345?ADXL345         -----    -----      0016H    0002H
+  +--> ?PR?IIC_START?IIC
+  +--> ?PR?_IIC_SENDBYTE?IIC
+  +--> ?PR?IIC_STOP?IIC
+
+?PR?IIC_START?IIC                         -----    -----      -----    -----
+  +--> ?PR?DELAY5US?SAMESHIT
+
+?PR?_IIC_SENDBYTE?IIC                     -----    -----      0018H    0002H
+  +--> ?PR?DELAY5US?SAMESHIT
+  +--> ?PR?IIC_RECVACK?IIC
+
+?PR?IIC_RECVACK?IIC                       -----    -----      -----    -----
+  +--> ?PR?DELAY5US?SAMESHIT
+
+?PR?IIC_STOP?IIC                          -----    -----      -----    -----
+  +--> ?PR?DELAY5US?SAMESHIT
+
+?PR?MULTIPLE_READ_ADXL345?ADXL345         -----    -----      0016H    0001H
+  +--> ?PR?IIC_START?IIC
+  +--> ?PR?_IIC_SENDBYTE?IIC
+  +--> ?PR?IIC_RECVBYTE?IIC
+  +--> ?PR?IIC_SENDACK?IIC
+  +--> ?PR?IIC_STOP?IIC
+  +--> ?PR?DELAY5MS?SAMESHIT
+
+?PR?IIC_RECVBYTE?IIC                      -----    -----      0017H    0002H
+  +--> ?PR?DELAY5US?SAMESHIT
+
+?PR?IIC_SENDACK?IIC                       0020H.0  0000H.1    -----    -----
+  +--> ?PR?DELAY5US?SAMESHIT
+
+
+
+SYMBOL TABLE OF MODULE:  ADXL (ADXL345)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ADXL345
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/30/2013  13:39:15  PAGE 3
+
+
+  C:0069H         PUBLIC        Init_ADXL345
+  D:0008H         PUBLIC        BUF
+  D:00C8H         PUBLIC        T2CON
+  D:0010H         PUBLIC        data_xyz
+  C:00C3H         PUBLIC        _Single_Read_ADXL345
+  C:0003H         PUBLIC        Multiple_read_ADXL345
+  D:00D0H         PUBLIC        PSW
+  C:0128H         PUBLIC        _Single_Write_ADXL345
+  -------         PROC          _SINGLE_WRITE_ADXL345
+  D:0016H         SYMBOL        REG_Address
+  D:0017H         SYMBOL        REG_data
+  C:0128H         LINE#         11
+  C:012CH         LINE#         12
+  C:012CH         LINE#         13
+  C:012FH         LINE#         14
+  C:0134H         LINE#         15
+  C:0139H         LINE#         16
+  C:013EH         LINE#         17
+  -------         ENDPROC       _SINGLE_WRITE_ADXL345
+  -------         PROC          _SINGLE_READ_ADXL345
+  D:001AH         SYMBOL        REG_Address
+  -------         DO            
+  D:001BH         SYMBOL        REG_data
+  -------         ENDDO         
+  C:00C3H         LINE#         21
+  C:00C5H         LINE#         22
+  C:00C5H         LINE#         23
+  C:00C8H         LINE#         24
+  C:00CDH         LINE#         25
+  C:00D2H         LINE#         26
+  C:00D5H         LINE#         27
+  C:00DAH         LINE#         28
+  C:00DFH         LINE#         29
+  C:00E4H         LINE#         30
+  C:00E7H         LINE#         31
+  C:00E9H         LINE#         32
+  -------         ENDPROC       _SINGLE_READ_ADXL345
+  -------         PROC          MULTIPLE_READ_ADXL345
+  -------         DO            
+  D:0016H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         36
+  C:0003H         LINE#         37
+  C:0003H         LINE#         38
+  C:0006H         LINE#         39
+  C:000BH         LINE#         40
+  C:0010H         LINE#         41
+  C:0013H         LINE#         42
+  C:0018H         LINE#         43
+  C:001BH         LINE#         44
+  C:001BH         LINE#         45
+  C:0025H         LINE#         46
+  C:002AH         LINE#         47
+  C:002AH         LINE#         48
+  C:002CH         LINE#         49
+  C:002EH         LINE#         51
+  C:002EH         LINE#         52
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/30/2013  13:39:15  PAGE 4
+
+
+  C:0033H         LINE#         53
+  C:0033H         LINE#         54
+  C:003CH         LINE#         55
+  C:003FH         LINE#         56
+  C:0042H         LINE#         57
+  C:0050H         LINE#         58
+  C:005CH         LINE#         59
+  C:0068H         LINE#         60
+  -------         ENDPROC       MULTIPLE_READ_ADXL345
+  -------         PROC          INIT_ADXL345
+  C:0069H         LINE#         64
+  C:0069H         LINE#         65
+  C:0069H         LINE#         66
+  C:0070H         LINE#         67
+  C:0077H         LINE#         68
+  C:007EH         LINE#         69
+  C:0085H         LINE#         70
+  C:008CH         LINE#         71
+  C:0093H         LINE#         72
+  -------         ENDPROC       INIT_ADXL345
+  -------         ENDMOD        ADXL345
+
+  -------         MODULE        IIC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0150H         PUBLIC        IIC_SendACK
+  C:015EH         PUBLIC        IIC_RecvACK
+  D:00B8H         PUBLIC        IP
+  B:00D0H.7       PUBLIC        CY
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0141H         PUBLIC        IIC_Start
+  B:0090H.1       PUBLIC        SDA
+  C:00EAH         PUBLIC        _IIC_SendByte
+  C:0178H         PUBLIC        IIC_Stop
+  C:009AH         PUBLIC        IIC_RecvByte
+  B:0090H.0       PUBLIC        SCL
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          IIC_START
+  C:0141H         LINE#         10
+  C:0141H         LINE#         11
+  C:0141H         LINE#         12
+  C:0143H         LINE#         13
+  C:0145H         LINE#         14
+  C:0148H         LINE#         15
+  C:014AH         LINE#         16
+  C:014DH         LINE#         17
+  C:014FH         LINE#         18
+  -------         ENDPROC       IIC_START
+  -------         PROC          IIC_STOP
+  C:0178H         LINE#         22
+  C:0178H         LINE#         23
+  C:0178H         LINE#         24
+  C:017AH         LINE#         25
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/30/2013  13:39:15  PAGE 5
+
+
+  C:017CH         LINE#         26
+  C:017FH         LINE#         27
+  C:0181H         LINE#         28
+  -------         ENDPROC       IIC_STOP
+  -------         PROC          IIC_SENDACK
+  B:0020H.0       SYMBOL        ack
+  C:0150H         LINE#         34
+  C:0150H         LINE#         35
+  C:0150H         LINE#         36
+  C:0154H         LINE#         37
+  C:0156H         LINE#         38
+  C:0159H         LINE#         39
+  C:015BH         LINE#         40
+  -------         ENDPROC       IIC_SENDACK
+  -------         PROC          IIC_RECVACK
+  C:015EH         LINE#         45
+  C:015EH         LINE#         46
+  C:015EH         LINE#         47
+  C:0160H         LINE#         48
+  C:0163H         LINE#         49
+  C:0165H         LINE#         50
+  C:0167H         LINE#         51
+  C:016AH         LINE#         53
+  C:016AH         LINE#         54
+  -------         ENDPROC       IIC_RECVACK
+  -------         PROC          _IIC_SENDBYTE
+  D:0018H         SYMBOL        dat
+  -------         DO            
+  D:0019H         SYMBOL        i
+  -------         ENDDO         
+  C:00EAH         LINE#         58
+  C:00ECH         LINE#         59
+  C:00ECH         LINE#         62
+  C:00EFH         LINE#         63
+  C:00EFH         LINE#         64
+  C:00F5H         LINE#         65
+  C:00F7H         LINE#         66
+  C:00F9H         LINE#         67
+  C:00FCH         LINE#         68
+  C:00FEH         LINE#         69
+  C:0101H         LINE#         70
+  C:010AH         LINE#         71
+  -------         ENDPROC       _IIC_SENDBYTE
+  -------         PROC          IIC_RECVBYTE
+  -------         DO            
+  D:0017H         SYMBOL        i
+  D:0018H         SYMBOL        dat
+  -------         ENDDO         
+  C:009AH         LINE#         76
+  C:009AH         LINE#         77
+  C:009AH         LINE#         79
+  C:009DH         LINE#         81
+  C:009FH         LINE#         82
+  C:00A1H         LINE#         83
+  C:00A1H         LINE#         84
+  C:00A7H         LINE#         85
+  C:00A9H         LINE#         86
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/30/2013  13:39:15  PAGE 6
+
+
+  C:00ACH         LINE#         87
+  C:00B2H         LINE#         88
+  C:00B4H         LINE#         89
+  C:00B7H         LINE#         90
+  C:00C0H         LINE#         91
+  C:00C2H         LINE#         92
+  -------         ENDPROC       IIC_RECVBYTE
+  -------         ENDMOD        IIC
+
+  -------         MODULE        SAMESHIT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:019CH         PUBLIC        Delay5ms
+  D:00A8H         PUBLIC        IE
+  C:016BH         PUBLIC        Delay5us
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0184H         PUBLIC        _Delay_us
+  D:00C8H         PUBLIC        T2CON
+  C:010DH         PUBLIC        _Delay
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY_US
+  D:0007H         SYMBOL        us
+  C:0184H         LINE#         3
+  C:0184H         LINE#         4
+  C:0184H         LINE#         5
+  C:018AH         LINE#         6
+  C:018EH         LINE#         7
+  C:018FH         LINE#         8
+  -------         ENDPROC       _DELAY_US
+  -------         PROC          DELAY5US
+  C:016BH         LINE#         14
+  C:016BH         LINE#         15
+  C:016BH         LINE#         16
+  C:016FH         LINE#         17
+  C:0173H         LINE#         18
+  C:0177H         LINE#         19
+  -------         ENDPROC       DELAY5US
+  -------         PROC          DELAY5MS
+  -------         DO            
+  D:0007H         SYMBOL        n
+  -------         ENDDO         
+  C:019CH         LINE#         25
+  C:019CH         LINE#         26
+  C:019CH         LINE#         27
+  C:019EH         LINE#         29
+  C:01A4H         LINE#         30
+  -------         ENDPROC       DELAY5MS
+  -------         PROC          _DELAY
+  D:0007H         SYMBOL        s
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:010DH         LINE#         32
+  C:010DH         LINE#         33
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/30/2013  13:39:15  PAGE 7
+
+
+  C:010DH         LINE#         35
+  C:0113H         LINE#         36
+  C:011FH         LINE#         37
+  C:0120H         LINE#         38
+  C:0121H         LINE#         39
+  C:0124H         LINE#         40
+  C:0127H         LINE#         41
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        SAMESHIT
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:01A5H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:01A5H         LINE#         3
+  C:01A5H         LINE#         4
+  C:01A8H         LINE#         5
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SINGLE_READ_ADXL345?ADXL345
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_US?SAMESHIT
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?SAMESHIT
+
+Program Size: data=29.1 xdata=0 code=427
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)
